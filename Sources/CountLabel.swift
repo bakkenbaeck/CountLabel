@@ -1,7 +1,8 @@
 import UIKit
 
 open class CountLabel: UILabel {
-    var animationDuration = 0.2
+    open var postfix: String?
+    open var prefix: String?
 
     var currentValue: Int {
         set {
@@ -19,6 +20,7 @@ open class CountLabel: UILabel {
         }
     }
 
+    fileprivate var animationDuration = 0.2
     fileprivate var startValue: CGFloat = 0.0
     fileprivate var endValue: CGFloat = 0.0
     fileprivate var progress: TimeInterval = 0.0
@@ -58,6 +60,8 @@ open class CountLabel: UILabel {
             self.progress = self.totalTime
         }
 
-        self.text = "\(self.currentValue)"
+
+
+        self.text = "\(self.prefix ?? "")\(self.currentValue)\(self.postfix ?? "")"
     }
 }
