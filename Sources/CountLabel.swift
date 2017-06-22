@@ -4,7 +4,7 @@ open class CountLabel: UILabel {
     open var postfix: String?
     open var prefix: String?
 
-    var currentValue: CGFloat {
+    var currentValue: Int {
         set {
 
         }
@@ -14,15 +14,16 @@ open class CountLabel: UILabel {
                 return self.endValue
             }
 
-            let percent = CGFloat(self.progress / self.totalTime)
+            let percent = self.progress / self.totalTime
 
-            return self.startValue + (percent * (self.endValue - self.startValue))
+            //urgh, how can i do these calculation while being accurate but not casting everything 500 times?
+            return Int(Double(self.startValue) + (percent * Double(self.endValue - self.startValue)))
         }
     }
 
     fileprivate var animationDuration = 0.2
-    fileprivate var startValue: CGFloat = 0.0
-    fileprivate var endValue: CGFloat = 0.0
+    fileprivate var startValue = 0
+    fileprivate var endValue = 0
     fileprivate var progress: TimeInterval = 0.0
     fileprivate var lastUpdate: TimeInterval = 0.0
     fileprivate var totalTime: TimeInterval = 0.0
@@ -32,7 +33,7 @@ open class CountLabel: UILabel {
 
     private var completion: ((Void) -> Void)?
 
-    open func count(from startValue: CGFloat, to endValue: CGFloat, withDuration duration: Double = 2.0, completion: @escaping (Void) -> Void) {
+    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: @escaping (Void) -> Void) {
         self.completion = completion
 
         self.startValue = startValue
@@ -76,7 +77,7 @@ open class CountLabel: UILabel {
         }
     }
 
-    private func setTextValue(_ value: CGFloat) {
+    private func setTextValue(_ value: Int) {
         self.text = "\(self.prefix ?? "")\(value)\(self.postfix ?? "")"
     }
 }
