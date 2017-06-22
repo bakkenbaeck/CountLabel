@@ -15,6 +15,7 @@
 		8933C78E1EB5B82C000D00A4 /* CountLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* CountLabelTests.swift */; };
 		8933C78F1EB5B82C000D00A4 /* CountLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* CountLabelTests.swift */; };
 		8933C7901EB5B82D000D00A4 /* CountLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* CountLabelTests.swift */; };
+		9FA6BC5C1EFBCFB400746A23 /* CountLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* CountLabel.framework */; };
 		DD7502881C68FEDE006590AF /* CountLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6DA0F1BF000BD002C0205 /* CountLabel.framework */; };
 		DD7502921C690C7A006590AF /* CountLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D9F01BEFFFBE002C0205 /* CountLabel.framework */; };
 		E6FA940E1EFBC65F0053ED1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FA940D1EFBC65F0053ED1D /* AppDelegate.swift */; };
@@ -126,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FA6BC5C1EFBCFB400746A23 /* CountLabel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +408,7 @@
 					};
 					52D6D9851BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 29X3GG489T;
 						LastSwiftMigration = 0800;
 					};
 					52D6D9E11BEFFF6E002C0205 = {
@@ -426,6 +429,7 @@
 					};
 					DD75028C1C690C7A006590AF = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 29X3GG489T;
 						LastSwiftMigration = 0800;
 					};
 					E6FA940A1EFBC65F0053ED1D = {
@@ -735,7 +739,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Configs/CountLabel.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CountLabel.CountLabel-iOS";
@@ -758,7 +762,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Configs/CountLabel.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CountLabel.CountLabel-iOS";
 				PRODUCT_NAME = CountLabel;
@@ -772,6 +776,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 29X3GG489T;
 				INFOPLIST_FILE = Configs/CountLabelTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CountLabel.CountLabel-iOS-Tests";
@@ -785,6 +790,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 29X3GG489T;
 				INFOPLIST_FILE = Configs/CountLabelTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CountLabel.CountLabel-iOS-Tests";
@@ -965,6 +971,7 @@
 		DD7502961C690C7A006590AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 29X3GG489T;
 				INFOPLIST_FILE = Configs/CountLabelTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CountLabel.CountLabel-tvOS-Tests";
@@ -978,6 +985,7 @@
 		DD7502971C690C7A006590AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 29X3GG489T;
 				INFOPLIST_FILE = Configs/CountLabelTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CountLabel.CountLabel-tvOS-Tests";
@@ -1107,6 +1115,7 @@
 				E6FA941B1EFBC65F0053ED1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,6 +1,6 @@
 import UIKit
 
-class CountLabel: UILabel {
+open class CountLabel: UILabel {
     var animationDuration = 0.2
 
     var currentValue: Int {
@@ -28,7 +28,7 @@ class CountLabel: UILabel {
 
     fileprivate var timer: CADisplayLink?
 
-    func count(from startValue: CGFloat, to endValue: CGFloat, withDuration duration: Double = 2.0) {
+    open func count(from startValue: CGFloat, to endValue: CGFloat, withDuration duration: Double = 2.0) {
         self.startValue = startValue
         self.endValue = endValue
 
