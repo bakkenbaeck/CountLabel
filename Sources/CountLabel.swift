@@ -4,19 +4,19 @@ open class CountLabel: UILabel {
     open var postfix: String?
     open var prefix: String?
 
-    var currentValue: Int {
+    var currentValue: CGFloat {
         set {
 
         }
         get {
             if self.progress >= self.totalTime {
 
-                return Int(self.endValue)
+                return self.endValue
             }
 
             let percent = CGFloat(self.progress / self.totalTime)
 
-            return Int(self.startValue + (percent * (self.endValue - self.startValue)))
+            return self.startValue + (percent * (self.endValue - self.startValue))
         }
     }
 
@@ -30,12 +30,21 @@ open class CountLabel: UILabel {
 
     fileprivate var timer: CADisplayLink?
 
-    open func count(from startValue: CGFloat, to endValue: CGFloat, withDuration duration: Double = 2.0) {
+    private var completion: ((Void) -> Void)?
+
+    open func count(from startValue: CGFloat, to endValue: CGFloat, withDuration duration: Double = 2.0, completion: @escaping (Void) -> Void) {
+        self.completion = completion
+
         self.startValue = startValue
         self.endValue = endValue
 
         self.timer?.invalidate()
         self.timer = nil
+
+        if duration <= 0.0 {
+            self.setTextValue(self.endValue)
+            self.completion?()
+        }
 
         self.easingRate = 3.0
         self.progress = 0
@@ -60,8 +69,14 @@ open class CountLabel: UILabel {
             self.progress = self.totalTime
         }
 
+        self.setTextValue(self.currentValue)
 
+        if self.progress == self.totalTime {
+            self.completion?()
+        }
+    }
 
-        self.text = "\(self.prefix ?? "")\(self.currentValue)\(self.postfix ?? "")"
+    private func setTextValue(_ value: CGFloat) {
+        self.text = "\(self.prefix ?? "")\(value)\(self.postfix ?? "")"
     }
 }
