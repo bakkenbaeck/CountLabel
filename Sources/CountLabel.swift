@@ -6,7 +6,6 @@ open class CountLabel: UILabel {
 
     var currentValue: Int {
         set {
-
         }
         get {
             if self.progress >= self.totalTime {
@@ -16,7 +15,6 @@ open class CountLabel: UILabel {
 
             let percent = self.progress / self.totalTime
 
-            //urgh, how can i do these calculation while being accurate but not casting everything 500 times?
             return Int(Double(self.startValue) + (percent * Double(self.endValue - self.startValue)))
         }
     }
@@ -33,7 +31,7 @@ open class CountLabel: UILabel {
 
     private var completion: ((Void) -> Void)?
 
-    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: @escaping (Void) -> Void) {
+    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: @escaping(Void) -> Void) {
         self.completion = completion
 
         self.startValue = startValue
