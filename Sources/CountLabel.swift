@@ -13,13 +13,14 @@ open class CountLabel: UILabel {
                 return self.endValue
             }
 
-            let percent = self.progress / self.totalTime
+            let percent: Double = self.progress / self.totalTime
 
-            return Int(Double(self.startValue) + (percent * Double(self.endValue - self.startValue)))
+            let updateVal = 1.0-pow((1.0 - percent), 3.0)
+
+            return Int(Double(self.startValue) + (updateVal * Double(self.endValue - self.startValue)))
         }
     }
 
-    fileprivate var animationDuration = 0.2
     fileprivate var startValue = 0
     fileprivate var endValue = 0
     fileprivate var progress: TimeInterval = 0.0
@@ -47,7 +48,7 @@ open class CountLabel: UILabel {
 
         self.easingRate = 3.0
         self.progress = 0
-        self.totalTime = duration
+        self.totalTime =  duration
         self.lastUpdate = Date.timeIntervalSinceReferenceDate
 
         let timer = CADisplayLink(target: self, selector: #selector(updateValue))
@@ -60,6 +61,7 @@ open class CountLabel: UILabel {
     func updateValue() {
         let now = Date.timeIntervalSinceReferenceDate
         self.progress = self.progress + (now - self.lastUpdate)
+
         self.lastUpdate = now
 
         if self.progress >= self.totalTime {
