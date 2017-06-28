@@ -33,7 +33,7 @@ open class CountLabel: UILabel {
 
     fileprivate var timer: CADisplayLink?
 
-    private var completion: ((Void) -> Void)?
+    private var completion: VoidCompletionBlock?
 
     open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: VoidCompletionBlock = nil) {
         self.completion = completion
