@@ -39,7 +39,7 @@ open class CountLabel: UILabel {
 
     fileprivate var completion: VoidCompletionBlock?
 
-    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.5, completion: VoidCompletionBlock? = nil) {
+    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: VoidCompletionBlock? = nil) {
         self.completion = completion
 
         self.startValue = startValue
@@ -53,7 +53,7 @@ open class CountLabel: UILabel {
             self.completion?()
         }
 
-        self.easingRate = Double(abs(endValue - startValue)).map(0...9999, 1.5...3.0)
+        self.easingRate = Double(abs(endValue - startValue)).map(0...9999, 1.1...3.0)
         self.span = abs(endValue - startValue)
         self.progress = 0
         self.totalTime = duration
