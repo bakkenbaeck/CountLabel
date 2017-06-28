@@ -2,7 +2,7 @@ import UIKit
 
 open class CountLabel: UILabel {
 
-    public typealias VoidCompletionBlock = (() -> ())?
+    public typealias VoidCompletionBlock = (() -> ())
 
     open var postfix: String?
     open var prefix: String?
@@ -35,7 +35,7 @@ open class CountLabel: UILabel {
 
     private var completion: VoidCompletionBlock?
 
-    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: VoidCompletionBlock = nil) {
+    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: VoidCompletionBlock? = nil) {
         self.completion = completion
 
         self.startValue = startValue
