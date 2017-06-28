@@ -19,7 +19,9 @@ open class CountLabel: UILabel {
             let percent: Double = self.progress / self.totalTime
 
             // 1.0 - pow(CGFloat(1.0 - percent), self.easingRate) // <- original
-            let updateVal =  (percent == 1.0) ? percent : 1 - ( (-10.0 * percent).powerOfTwo )
+            // (percent == 1.0) ? percent : 1 - ( (-10.0 * percent).powerOfTwo ) // exponential ease out
+            // sqrt((2 - percent) * percent) // circular ease out
+            let updateVal =  self.exponentialEaseInOut(for: percent)
 
             return Int(Double(self.startValue) + (updateVal * Double(self.endValue - self.startValue)))
         }
@@ -84,6 +86,17 @@ open class CountLabel: UILabel {
 
     private func setTextValue(_ value: Int) {
         self.text = "\(self.prefix ?? "")\(value)\(self.postfix ?? "")"
+    }
+
+    private func exponentialEaseInOut(for time: Double) -> Double {
+        if time == 0 || time == 1 { return time }
+
+        if time < 1/2 {
+            return 1/2 * (  ((20 * time) - 10).powerOfTwo  )
+        }
+        else{
+            return -1/2 * (  ((-20 * time) + 10/1).powerOfTwo  ) + 1
+        }
     }
 }
 
