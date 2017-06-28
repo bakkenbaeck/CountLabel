@@ -2,7 +2,7 @@ import UIKit
 
 open class CountLabel: UILabel {
 
-    public typealias VoidCompletionBlock = (() -> ())
+    public typealias VoidCompletionBlock = (() -> Void)
 
     open var postfix: String?
     open var prefix: String?
@@ -18,9 +18,10 @@ open class CountLabel: UILabel {
 
             let percent: Double = self.progress / self.totalTime
 
-            let updateVal = 1.0-pow(CGFloat(1.0 - percent), self.easingRate)
+            // 1.0 - pow(CGFloat(1.0 - percent), self.easingRate) // <- original
+            let updateVal =  (percent == 1.0) ? percent : 1 - ( (-10.0 * percent).powerOfTwo )
 
-            return Int(CGFloat(self.startValue) + (updateVal * CGFloat(self.endValue - self.startValue)))
+            return Int(Double(self.startValue) + (updateVal * Double(self.endValue - self.startValue)))
         }
     }
 
@@ -29,13 +30,13 @@ open class CountLabel: UILabel {
     fileprivate var progress: TimeInterval = 0.0
     fileprivate var lastUpdate: TimeInterval = 0.0
     fileprivate var totalTime: TimeInterval = 0.0
-    fileprivate var easingRate: CGFloat = 0.0
+    fileprivate var easingRate: CGFloat = 10.0
 
     fileprivate var timer: CADisplayLink?
 
     private var completion: VoidCompletionBlock?
 
-    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: VoidCompletionBlock? = nil) {
+    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.5, completion: VoidCompletionBlock? = nil) {
         self.completion = completion
 
         self.startValue = startValue
@@ -49,9 +50,10 @@ open class CountLabel: UILabel {
             self.completion?()
         }
 
-        self.easingRate =  CGFloat(abs(endValue - startValue)).map(0...100000, 2.0...6.0)
+        // 100 = 3.0   3235203 = 6.0
+        //        self.easingRate =  CGFloat(abs(endValue - startValue)).map(0...100000, 2.0...5.0)
         self.progress = 0
-        self.totalTime =  duration
+        self.totalTime = duration
         self.lastUpdate = Date.timeIntervalSinceReferenceDate
 
         let timer = CADisplayLink(target: self, selector: #selector(updateValue))
@@ -90,4 +92,47 @@ extension CGFloat {
     func map(_ from: ClosedRange<CGFloat>, _ to: ClosedRange<CGFloat>) -> CGFloat {
         return ((self - from.lowerBound) / (from.upperBound - from.lowerBound)) * (to.upperBound - to.lowerBound) + to.lowerBound
     }
+}
+
+public protocol FloatingPointMath: FloatingPoint{
+
+    /// The mathematical sine of a floating-point value.
+    var sine: Self {get}
+
+    /// The mathematical cosine of a floating-point value.
+    var cosine: Self {get}
+
+    /**
+     The power base 2 of a floating-point value.
+     In the next example 'y' has a value of '3.0'.
+     The powerOfTwo of 'y' is therefore '8.0'.
+
+     let y: Double = 3.0
+     let p = y.powerOfTwo
+     print(p)  // "8.0"
+     */
+    var powerOfTwo: Self {get}
+}
+
+extension Float : FloatingPointMath {
+
+    public var sine : Float {return sin(self)}
+    public var cosine : Float {return cos(self)}
+    public var powerOfTwo: Float {return pow(2, self)}
+}
+
+// MARK: - FloatingPointMath extension for Double.
+extension Double : FloatingPointMath {
+
+    public var sine : Double {return sin(self)}
+    public var cosine : Double {return cos(self)}
+    public var powerOfTwo: Double {return pow(2, self)}
+}
+
+// MARK: - FloatingPointMath extension for CGFloat.
+extension CGFloat : FloatingPointMath {
+
+    public var sine : CGFloat {return sin(self)}
+    public var cosine : CGFloat {return cos(self)}
+    public var powerOfTwo: CGFloat {return pow(2, self)}
 }

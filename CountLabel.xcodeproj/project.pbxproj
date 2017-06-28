@@ -10,13 +10,14 @@
 		52D6D9871BEFF229002C0205 /* CountLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* CountLabel.framework */; };
 		8933C7851EB5B820000D00A4 /* CountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* CountLabel.swift */; };
 		8933C7901EB5B82D000D00A4 /* CountLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* CountLabelTests.swift */; };
+		9FAD885A1F03A99A006CD15E /* CountLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* CountLabel.framework */; };
+		9FAD885C1F03A9D9006CD15E /* CountLabel.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* CountLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D197B126C760FE2DD8966F2B /* CountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* CountLabel.swift */; };
 		E6FA940E1EFBC65F0053ED1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FA940D1EFBC65F0053ED1D /* AppDelegate.swift */; };
 		E6FA94101EFBC65F0053ED1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FA940F1EFBC65F0053ED1D /* ViewController.swift */; };
 		E6FA94131EFBC65F0053ED1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6FA94111EFBC65F0053ED1D /* Main.storyboard */; };
 		E6FA94151EFBC65F0053ED1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6FA94141EFBC65F0053ED1D /* Assets.xcassets */; };
 		E6FA94181EFBC65F0053ED1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6FA94161EFBC65F0053ED1D /* LaunchScreen.storyboard */; };
-		E6FA94251EFBDF200053ED1D /* CountLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* CountLabel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +28,28 @@
 			remoteGlobalIDString = 52D6D97B1BEFF229002C0205;
 			remoteInfo = CountLabel;
 		};
+		9FAD88581F03A988006CD15E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52D6D97B1BEFF229002C0205;
+			remoteInfo = "CountLabel-iOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9FAD885B1F03A9CA006CD15E /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9FAD885C1F03A9D9006CD15E /* CountLabel.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* CountLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CountLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6FA94251EFBDF200053ED1D /* CountLabel.framework in Frameworks */,
+				9FAD885A1F03A99A006CD15E /* CountLabel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,10 +226,12 @@
 				E6FA94071EFBC65F0053ED1D /* Sources */,
 				E6FA94081EFBC65F0053ED1D /* Frameworks */,
 				E6FA94091EFBC65F0053ED1D /* Resources */,
+				9FAD885B1F03A9CA006CD15E /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9FAD88591F03A988006CD15E /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -321,6 +345,11 @@
 			isa = PBXTargetDependency;
 			target = 52D6D97B1BEFF229002C0205 /* CountLabel-iOS */;
 			targetProxy = 52D6D9881BEFF229002C0205 /* PBXContainerItemProxy */;
+		};
+		9FAD88591F03A988006CD15E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52D6D97B1BEFF229002C0205 /* CountLabel-iOS */;
+			targetProxy = 9FAD88581F03A988006CD15E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
