@@ -49,10 +49,8 @@ open class CountLabel: UILabel {
             self.completion?()
         }
 
-        //100 = 3.0   3235203 = 6.0
-        self.easingRate =  CGFloat(abs(endValue - startValue)).map(0...100000, 2.0...5.0)
+        self.easingRate =  CGFloat(abs(endValue - startValue)).map(0...100000, 2.0...6.0)
         self.progress = 0
-        print(self.easingRate)
         self.totalTime =  duration
         self.lastUpdate = Date.timeIntervalSinceReferenceDate
 
