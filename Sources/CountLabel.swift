@@ -20,7 +20,7 @@ open class CountLabel: UILabel {
 
             var updateVal = self.easOut(for: percent)
             if self.span > 9999 {
-                updateVal =  self.exponentialEaseInOut(for: percent)
+                updateVal = self.exponentialEaseInOut(for: percent)
             }
 
             return Int(Double(self.startValue) + (updateVal * Double(self.endValue - self.startValue)))
@@ -53,7 +53,7 @@ open class CountLabel: UILabel {
             self.completion?()
         }
 
-        self.easingRate = Double(abs(endValue - startValue)).map(0...9999, 1.1...3.0)
+        self.easingRate = Double(abs(endValue - startValue)).map(0 ... 9999, 1.1 ... 3.0)
         self.span = abs(endValue - startValue)
         self.progress = 0
         self.totalTime = duration
@@ -90,30 +90,29 @@ open class CountLabel: UILabel {
     }
 
     private func easOut(for time: Double) -> Double {
-        return 1.0 - pow((1.0-time), self.easingRate)
+        return 1.0 - pow((1.0 - time), self.easingRate)
     }
 
     private func exponentialEaseInOut(for time: Double) -> Double {
         if time == 0 || time == 1 { return time }
 
-        if time < 1/2 {
-            return 1/2 * (  ((20 * time) - 10).powerOfTwo  )
-        }
-        else{
-            return -1/2 * (  ((-20 * time) + 10/1).powerOfTwo  ) + 1
+        if time < 1 / 2 {
+            return 1 / 2 * (((20 * time) - 10).powerOfTwo)
+        } else {
+            return -1 / 2 * (((-20 * time) + 10 / 1).powerOfTwo) + 1
         }
     }
 }
 
-public protocol FloatingPointMath: FloatingPoint{
+public protocol FloatingPointMath: FloatingPoint {
 
     /// The mathematical sine of a floating-point value.
-    var sine: Self {get}
+    var sine: Self { get }
 
     /// The mathematical cosine of a floating-point value.
-    var cosine: Self {get}
+    var cosine: Self { get }
 
-    /**
+    /** 
      The power base 2 of a floating-point value.
      In the next example 'y' has a value of '3.0'.
      The powerOfTwo of 'y' is therefore '8.0'.
@@ -122,33 +121,34 @@ public protocol FloatingPointMath: FloatingPoint{
      let p = y.powerOfTwo
      print(p)  // "8.0"
      */
-    var powerOfTwo: Self {get}
+    var powerOfTwo: Self { get }
 }
 
-extension Float : FloatingPointMath {
+extension Float: FloatingPointMath {
 
-    public var sine : Float {return sin(self)}
-    public var cosine : Float {return cos(self)}
-    public var powerOfTwo: Float {return pow(2, self)}
+    public var sine: Float { return sin(self) }
+    public var cosine: Float { return cos(self) }
+    public var powerOfTwo: Float { return pow(2, self) }
 }
 
 // MARK: - FloatingPointMath extension for Double.
-extension Double : FloatingPointMath {
+extension Double: FloatingPointMath {
 
-    public var sine : Double {return sin(self)}
-    public var cosine : Double {return cos(self)}
-    public var powerOfTwo: Double {return pow(2, self)}
+    public var sine: Double { return sin(self) }
+    public var cosine: Double { return cos(self) }
+    public var powerOfTwo: Double { return pow(2, self) }
 }
 
 // MARK: - FloatingPointMath extension for CGFloat.
-extension CGFloat : FloatingPointMath {
+extension CGFloat: FloatingPointMath {
 
-    public var sine : CGFloat {return sin(self)}
-    public var cosine : CGFloat {return cos(self)}
-    public var powerOfTwo: CGFloat {return pow(2, self)}
+    public var sine: CGFloat { return sin(self) }
+    public var cosine: CGFloat { return cos(self) }
+    public var powerOfTwo: CGFloat { return pow(2, self) }
 }
 
 extension Double {
+
     func map(_ from: ClosedRange<Double>, _ to: ClosedRange<Double>) -> Double {
         return ((self - from.lowerBound) / (from.upperBound - from.lowerBound)) * (to.upperBound - to.lowerBound) + to.lowerBound
     }
