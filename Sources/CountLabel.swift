@@ -18,10 +18,10 @@ open class CountLabel: UILabel {
 
             let percent: Double = self.progress / self.totalTime
 
-            // 1.0 - pow(CGFloat(1.0 - percent), self.easingRate) // <- original
-            // (percent == 1.0) ? percent : 1 - ( (-10.0 * percent).powerOfTwo ) // exponential ease out
-            // sqrt((2 - percent) * percent) // circular ease out
-            let updateVal =  self.exponentialEaseInOut(for: percent)
+            var updateVal = self.easOut(for: percent)
+            if self.span > 9999 {
+                updateVal =  self.exponentialEaseInOut(for: percent)
+            }
 
             return Int(Double(self.startValue) + (updateVal * Double(self.endValue - self.startValue)))
         }
@@ -32,11 +32,12 @@ open class CountLabel: UILabel {
     fileprivate var progress: TimeInterval = 0.0
     fileprivate var lastUpdate: TimeInterval = 0.0
     fileprivate var totalTime: TimeInterval = 0.0
-    fileprivate var easingRate: CGFloat = 10.0
+    fileprivate var easingRate = 3.0
+    fileprivate var span = 0
 
     fileprivate var timer: CADisplayLink?
 
-    private var completion: VoidCompletionBlock?
+    fileprivate var completion: VoidCompletionBlock?
 
     open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.5, completion: VoidCompletionBlock? = nil) {
         self.completion = completion
@@ -52,8 +53,8 @@ open class CountLabel: UILabel {
             self.completion?()
         }
 
-        // 100 = 3.0   3235203 = 6.0
-        //        self.easingRate =  CGFloat(abs(endValue - startValue)).map(0...100000, 2.0...5.0)
+        self.easingRate = Double(abs(endValue - startValue)).map(0...9999, 1.5...3.0)
+        self.span = abs(endValue - startValue)
         self.progress = 0
         self.totalTime = duration
         self.lastUpdate = Date.timeIntervalSinceReferenceDate
@@ -88,6 +89,10 @@ open class CountLabel: UILabel {
         self.text = "\(self.prefix ?? "")\(value)\(self.postfix ?? "")"
     }
 
+    private func easOut(for time: Double) -> Double {
+        return 1.0 - pow((1.0-time), self.easingRate)
+    }
+
     private func exponentialEaseInOut(for time: Double) -> Double {
         if time == 0 || time == 1 { return time }
 
@@ -97,13 +102,6 @@ open class CountLabel: UILabel {
         else{
             return -1/2 * (  ((-20 * time) + 10/1).powerOfTwo  ) + 1
         }
-    }
-}
-
-extension CGFloat {
-
-    func map(_ from: ClosedRange<CGFloat>, _ to: ClosedRange<CGFloat>) -> CGFloat {
-        return ((self - from.lowerBound) / (from.upperBound - from.lowerBound)) * (to.upperBound - to.lowerBound) + to.lowerBound
     }
 }
 
@@ -148,4 +146,10 @@ extension CGFloat : FloatingPointMath {
     public var sine : CGFloat {return sin(self)}
     public var cosine : CGFloat {return cos(self)}
     public var powerOfTwo: CGFloat {return pow(2, self)}
+}
+
+extension Double {
+    func map(_ from: ClosedRange<Double>, _ to: ClosedRange<Double>) -> Double {
+        return ((self - from.lowerBound) / (from.upperBound - from.lowerBound)) * (to.upperBound - to.lowerBound) + to.lowerBound
+    }
 }
