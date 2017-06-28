@@ -39,7 +39,7 @@ open class CountLabel: UILabel {
 
     fileprivate var completion: VoidCompletionBlock?
 
-    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.0, completion: VoidCompletionBlock? = nil) {
+    open func count(from startValue: Int, to endValue: Int, withDuration duration: Double = 2.25, completion: VoidCompletionBlock? = nil) {
         self.completion = completion
 
         self.startValue = startValue
