@@ -15,9 +15,9 @@ open class CountLabel: UILabel {
 
             let percent: Double = self.progress / self.totalTime
 
-            let updateVal = 1.0-pow((1.0 - percent), 3.0)
+            let updateVal = 1.0-pow(CGFloat(1.0 - percent), self.easingRate)
 
-            return Int(Double(self.startValue) + (updateVal * Double(self.endValue - self.startValue)))
+            return Int(CGFloat(self.startValue) + (updateVal * CGFloat(self.endValue - self.startValue)))
         }
     }
 
@@ -46,8 +46,10 @@ open class CountLabel: UILabel {
             self.completion?()
         }
 
-        self.easingRate = 3.0
+        //100 = 3.0   3235203 = 6.0
+        self.easingRate =  CGFloat(abs(endValue - startValue)).map(0...100000, 2.0...5.0)
         self.progress = 0
+        print(self.easingRate)
         self.totalTime =  duration
         self.lastUpdate = Date.timeIntervalSinceReferenceDate
 
@@ -79,5 +81,12 @@ open class CountLabel: UILabel {
 
     private func setTextValue(_ value: Int) {
         self.text = "\(self.prefix ?? "")\(value)\(self.postfix ?? "")"
+    }
+}
+
+extension CGFloat {
+
+    func map(_ from: ClosedRange<CGFloat>, _ to: ClosedRange<CGFloat>) -> CGFloat {
+        return ((self - from.lowerBound) / (from.upperBound - from.lowerBound)) * (to.upperBound - to.lowerBound) + to.lowerBound
     }
 }
