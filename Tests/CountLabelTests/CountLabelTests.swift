@@ -5,7 +5,7 @@ import CountLabel
 class CountLabelTests: XCTestCase {
 
     func testCountLabel() {
-        let expect = self.expectation(description: "fetch overview")
+        let expect = self.expectation(description: "Label changes count")
 
         let countLabel = CountLabel()
         countLabel.count(from: 0, to: 1, withDuration: 0.0) {
@@ -16,26 +16,23 @@ class CountLabelTests: XCTestCase {
         self.waitForExpectations(timeout: 5)
     }
 
-    func testPrefix() {
-        let expect = self.expectation(description: "fetch overview")
+    func testNumberFormatter() {
+        let expect = self.expectation(description: "Label uses numberformat")
 
         let countLabel = CountLabel()
-        countLabel.prefix = "At the next beep it will be: "
-        countLabel.count(from: 0, to: 1, withDuration: 0.0) {
-            XCTAssertEqual(countLabel.text ?? "", "At the next beep it will be: 1")
-            expect.fulfill()
-        }
 
-        self.waitForExpectations(timeout: 5)
-    }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .none
+        numberFormatter.usesGroupingSeparator = true
+        numberFormatter.groupingSeparator = " "
+        numberFormatter.groupingSize = 3
+        numberFormatter.negativeSuffix = " kr"
+        numberFormatter.positiveSuffix = " kr"
 
-    func testPostfix() {
-        let expect = self.expectation(description: "fetch overview")
+        countLabel.numberFormatter = numberFormatter
 
-        let countLabel = CountLabel()
-        countLabel.postfix = " seconds before universe implodes"
-        countLabel.count(from: 0, to: 1, withDuration: 0.0) {
-            XCTAssertEqual(countLabel.text ?? "", "1 seconds before universe implodes")
+        countLabel.count(from: 0, to: 1000000, withDuration: 0.0) {
+            XCTAssertEqual(countLabel.text ?? "", "1 000 000 kr")
             expect.fulfill()
         }
 
