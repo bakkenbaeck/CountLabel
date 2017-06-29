@@ -4,8 +4,7 @@ open class CountLabel: UILabel {
 
     public typealias VoidCompletionBlock = (() -> Void)
 
-    open var postfix: String?
-    open var prefix: String?
+    open var numberFormatter: NumberFormatter?
 
     var currentValue: Int {
         set {
@@ -86,7 +85,11 @@ open class CountLabel: UILabel {
     }
 
     private func setTextValue(_ value: Int) {
-        self.text = "\(self.prefix ?? "")\(value)\(self.postfix ?? "")"
+        if let formattedValue = self.numberFormatter?.string(from: NSNumber(integerLiteral: value)) {
+            self.text = "\(formattedValue)"
+        } else {
+            self.text = "\(value)"
+        }
     }
 
     private func easOut(for time: Double) -> Double {
