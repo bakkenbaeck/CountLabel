@@ -1,11 +1,10 @@
 # CountLabel
 
-![CountLabel](../hotpink.gif)
+![CountLabel](hotPink.gif)
 
 Adds animated counting support to UILabel in Swift.
 
-Based upon this component in Objective-C
-https://github.com/dataxpress/UICountingLabel
+Based upon the [COunterLabel](https://github.com/dataxpress/UICountingLabel) in Objective-C
 
 ```
 let countLabel = CountLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 44)
