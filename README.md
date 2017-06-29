@@ -1,6 +1,6 @@
 # CountLabel
 
-![CountLabel](hotpink.gif)
+![CountLabel](../hotpink.gif)
 
 Adds animated counting support to UILabel in Swift.
 
@@ -9,7 +9,9 @@ https://github.com/dataxpress/UICountingLabel
 
 ```
 let countLabel = CountLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 44)
+
 // configure countLabel as you would with a UILabel
+
 self.view.addSubview(countLabel)
 
 countLabel.count(from: 0, to: 100) {
@@ -17,7 +19,7 @@ countLabel.count(from: 0, to: 100) {
 }
 ```
 
-You can assign a NumberFormatter to format the way the numbers are shown:
+You can assign a `NumberFormatter` to format the way the numbers are shown:
 ```
 let numberFormatter = NumberFormatter()
 numberFormatter.numberStyle = .none
