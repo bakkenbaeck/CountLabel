@@ -44,9 +44,9 @@ open class CountLabel: UILabel {
         self.startValue = startValue
         self.endValue = endValue
 
-        self.timer?.invalidate()
-        self.timer = nil
-
+        timer?.invalidate()
+        timer = nil
+        
         if duration <= 0.0 {
             setTextValue(endValue)
             completion?()
@@ -58,11 +58,10 @@ open class CountLabel: UILabel {
         totalTime = duration
         lastUpdate = Date.timeIntervalSinceReferenceDate
 
-        let timer = CADisplayLink(target: self, selector: #selector(updateValue))
-        timer.preferredFramesPerSecond = 24
-        timer.add(to: .current, forMode: .defaultRunLoopMode)
 
-        self.timer = timer
+        timer = CADisplayLink(target: self, selector: #selector(updateValue))
+        timer?.preferredFramesPerSecond = 24
+        timer?.add(to: .current, forMode: .defaultRunLoopMode)
     }
 
     func updateValue() {
