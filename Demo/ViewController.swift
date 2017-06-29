@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       view.addSubview(countLabel)
+        view.addSubview(countLabel)
 
         count()
     }

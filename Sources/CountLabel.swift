@@ -10,19 +10,19 @@ open class CountLabel: UILabel {
         set {
         }
         get {
-            if self.progress >= self.totalTime {
+            if progress >= totalTime {
 
-                return self.endValue
+                return endValue
             }
 
-            let percent: Double = self.progress / self.totalTime
+            let percent: Double = progress / totalTime
 
-            var updateVal = self.easOut(for: percent)
-            if self.span > 9999 {
-                updateVal = self.exponentialEaseInOut(for: percent)
+            var updateVal = easOut(for: percent)
+            if span > 9999 {
+                updateVal = exponentialEaseInOut(for: percent)
             }
 
-            return Int(Double(self.startValue) + (updateVal * Double(self.endValue - self.startValue)))
+            return Int(Double(startValue) + (updateVal * Double(endValue - startValue)))
         }
     }
 
@@ -48,15 +48,15 @@ open class CountLabel: UILabel {
         self.timer = nil
 
         if duration <= 0.0 {
-            self.setTextValue(self.endValue)
-            self.completion?()
+            setTextValue(endValue)
+            completion?()
         }
 
-        self.easingRate = Double(abs(endValue - startValue)).map(0 ... 9999, 1.1 ... 3.0)
-        self.span = abs(endValue - startValue)
-        self.progress = 0
-        self.totalTime = duration
-        self.lastUpdate = Date.timeIntervalSinceReferenceDate
+        easingRate = Double(abs(endValue - startValue)).map(0 ... 9999, 1.1 ... 3.0)
+        span = abs(endValue - startValue)
+        progress = 0
+        totalTime = duration
+        lastUpdate = Date.timeIntervalSinceReferenceDate
 
         let timer = CADisplayLink(target: self, selector: #selector(updateValue))
         timer.preferredFramesPerSecond = 24
@@ -67,33 +67,33 @@ open class CountLabel: UILabel {
 
     func updateValue() {
         let now = Date.timeIntervalSinceReferenceDate
-        self.progress = self.progress + (now - self.lastUpdate)
+        progress = progress + (now - lastUpdate)
 
-        self.lastUpdate = now
+        lastUpdate = now
 
-        if self.progress >= self.totalTime {
-            self.timer?.invalidate()
-            self.timer = nil
-            self.progress = self.totalTime
+        if progress >= totalTime {
+            timer?.invalidate()
+            timer = nil
+            progress = totalTime
         }
 
-        self.setTextValue(self.currentValue)
+        setTextValue(currentValue)
 
-        if self.progress == self.totalTime {
-            self.completion?()
+        if progress == totalTime {
+            completion?()
         }
     }
 
     private func setTextValue(_ value: Int) {
-        if let formattedValue = self.numberFormatter?.string(from: NSNumber(integerLiteral: value)) {
-            self.text = "\(formattedValue)"
+        if let formattedValue = numberFormatter?.string(from: NSNumber(integerLiteral: value)) {
+            text = "\(formattedValue)"
         } else {
-            self.text = "\(value)"
+            text = "\(value)"
         }
     }
 
     private func easOut(for time: Double) -> Double {
-        return 1.0 - pow((1.0 - time), self.easingRate)
+        return 1.0 - pow((1.0 - time), easingRate)
     }
 
     private func exponentialEaseInOut(for time: Double) -> Double {
