@@ -5,7 +5,7 @@ class ViewController: UIViewController {
 
     lazy var countLabel: CountLabel = {
         let countLabel = CountLabel(frame: CGRect(x: 22 , y: 50, width: self.view.bounds.width - 44, height: 200))  //Why do i need self here?
-        countLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 28, weight: 10)
+        countLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 148, weight: 10)
         countLabel.textColor = UIColor.init(colorLiteralRed: 255.0/255.0, green: 20.0/255.0, blue: 147.0/255.0, alpha: 1.0)
 
         let numberFormatter = NumberFormatter()
@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         numberFormatter.negativeSuffix = " kr"
         numberFormatter.positiveSuffix = " kr"
 
-        countLabel.numberFormatter = numberFormatter
-        
+//        countLabel.numberFormatter = numberFormatter
+
         return countLabel
     }()
 
