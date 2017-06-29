@@ -5,7 +5,7 @@ import CountLabel
 class CountLabelTests: XCTestCase {
 
     func testCountLabel() {
-        let expect = self.expectation(description: "Label changes count")
+        let expect = expectation(description: "Label changes count")
 
         let countLabel = CountLabel()
         countLabel.count(from: 0, to: 1, withDuration: 0.0) {
@@ -13,11 +13,11 @@ class CountLabelTests: XCTestCase {
             expect.fulfill()
         }
 
-        self.waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: 5)
     }
 
     func testNumberFormatter() {
-        let expect = self.expectation(description: "Label uses numberformat")
+        let expect = expectation(description: "Label uses numberformat")
 
         let countLabel = CountLabel()
 
@@ -36,6 +36,6 @@ class CountLabelTests: XCTestCase {
             expect.fulfill()
         }
 
-        self.waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: 5)
     }
 }
