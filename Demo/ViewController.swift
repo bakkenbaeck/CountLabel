@@ -7,7 +7,8 @@ class ViewController: UIViewController {
         let countLabel = CountLabel(frame: CGRect(x: 22 , y: 50, width: self.view.bounds.width - 44, height: 200))  //Why do i need self here?
         countLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 148, weight: 10)
         countLabel.textColor = UIColor.init(colorLiteralRed: 255.0/255.0, green: 20.0/255.0, blue: 147.0/255.0, alpha: 1.0)
-
+        countLabel.textAlignment = .right
+        
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .none
         numberFormatter.usesGroupingSeparator = true
@@ -36,7 +37,7 @@ class ViewController: UIViewController {
     }
 
     @objc private func countBack() {
-        countLabel.count(from: 2500, to: 0) {
+        countLabel.count(from: 2500000, to: 0) {
             self.perform(#selector(self.count), with: nil, afterDelay: 1.0)
         }
     }
