@@ -64,7 +64,7 @@ open class CountLabel: UILabel {
         timer?.add(to: .current, forMode: .defaultRunLoopMode)
     }
 
-    func updateValue() {
+    @objc func updateValue() {
         let now = Date.timeIntervalSinceReferenceDate
         progress = progress + (now - lastUpdate)
 
